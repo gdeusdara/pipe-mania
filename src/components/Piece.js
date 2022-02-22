@@ -31,10 +31,10 @@ export default function Piece({ item }) {
     rotate = '90deg'
   } else if (item[1] === '3') {
     LStyle = styles.L3
-    rotate = '270deg'
+    rotate = '180deg'
   } else if (item[1] === '4') {
     LStyle = styles.L4
-    rotate = '180deg'
+    rotate = '270deg'
   }
 
   return (
@@ -49,15 +49,11 @@ const styles = StyleSheet.create({
     aspectRatio: 4/4,
     flex: 1,
     width: 100,
-    borderColor: 'black',
-    borderWidth: 1
   },
   imageL: {
     aspectRatio: 4/4,
     width: 65,
     height: 65,
-    borderColor: 'black',
-    borderWidth: 1
   },
   L1: {
     justifyContent: 'flex-start',
@@ -69,10 +65,10 @@ const styles = StyleSheet.create({
   },
   L3: {
     justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
   },
   L4: {
     justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
   },
 });

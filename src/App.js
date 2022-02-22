@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import fase1 from './fases/fase1';
 import parseFase from './parseFase';
 import Piece from './components/Piece';
+import isSolved from './utils/isSolved';
 
 export default function App() {
   const [fase, setFase] = useState([])
@@ -11,6 +12,12 @@ export default function App() {
   useEffect(() => {
     setFase(parseFase(fase1.trim()))
   }, [])
+
+  useEffect(() => {
+    if (fase.length) {
+      console.log(isSolved(fase))
+    }
+  }, [fase])
   return (
     <View style={styles.container}>
       {fase.map((item, index) => {
