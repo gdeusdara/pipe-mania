@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import fase1 from './fases/fase1';
 import parseFase from './utils/parseFase';
 import Piece from './components/Piece';
@@ -8,6 +8,7 @@ import isSolved from './utils/isSolved';
 
 export default function App() {
   const [fase, setFase] = useState([])
+  const [extraData, setExtraData] = useState(0)
 
   useEffect(() => {
     setFase(parseFase(fase1.trim()))
@@ -17,14 +18,23 @@ export default function App() {
     if (fase.length) {
       console.log(isSolved(fase))
     }
-  }, [fase])
+  }, [fase, extraData])
+
+  const onPressItem = (newItem, index, topIndex) => {
+    const newFase = fase
+    newFase[topIndex][index] = newItem
+    setFase(newFase)
+    setExtraData(extraData+1)
+  }
+
   return (
     <View style={styles.container}>
-      {fase.map((item, index) => {
+      {fase.map((item, topIndex) => {
+
         return (
-          <View key={String(index+item[0])} style={styles.row}>
+          <View style={styles.row}>
             {item.map((piece, index) => (
-              <Piece key={String(piece+index)} item={piece} />
+              <Piece key={String(piece+index)} item={piece} onPressItem={(newItem) => onPressItem(newItem, index, topIndex)} />
             ))}
           </View>
         )

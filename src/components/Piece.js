@@ -1,7 +1,21 @@
-import { StyleSheet, Text, View, Image, Animated } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TouchableOpacity, useMemo } from 'react-native';
 import { pipeBegin, pipeL, pipeReto } from '../icons';
 
-export default function Piece({ item }) {
+export default function Piece({ item, onPressItem = () => {} }) {
+
+  const onPress = () => {
+    let number = parseInt(item[1])
+    if (typeof number === 'number') {
+      if (number < 4) {
+        number++
+      } else {
+        number = 1
+      }
+
+      item = `${item[0]}${number}`
+      onPressItem(item)
+    }
+  }
 
   let image = null
   let viewStype = null
@@ -38,22 +52,20 @@ export default function Piece({ item }) {
   }
 
   return (
-    <View style={[viewStype, LStyle]}>
+    <TouchableOpacity onPress={onPress} style={[viewStype, LStyle]}>
       <Animated.Image style={[imageStyle, {transform: [{ rotate }]}]} source={image} resizeMode="contain" />
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   image: {
-    aspectRatio: 4/4,
-    flex: 1,
-    width: 100,
+    width: 75,
+    height: 75,
   },
   imageL: {
-    aspectRatio: 4/4,
-    width: 65,
-    height: 65,
+    width: 75 * 0.65,
+    height: 75 * 0.65,
   },
   L1: {
     justifyContent: 'flex-start',

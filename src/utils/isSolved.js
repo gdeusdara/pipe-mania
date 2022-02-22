@@ -131,7 +131,6 @@ export default function isSolved(map, index1 = null, index2 = null, before = nul
   }
 
   if (letter === 'L') {
-    console.log(number, before, LWayIn[number])
     if (number === before) {
       return isSolved(map, i+LIWayOut[number], l+LLWayOut[number], LWayOut[before])
     }
