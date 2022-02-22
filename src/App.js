@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import fase1 from './fases/fase1';
-import parseFase from './parseFase';
+import parseFase from './utils/parseFase';
 import Piece from './components/Piece';
 import isSolved from './utils/isSolved';
 
