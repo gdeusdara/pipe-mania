@@ -60,12 +60,12 @@ export default function Piece({ item, onPressItem = () => {} }) {
 
 const styles = StyleSheet.create({
   image: {
-    width: 75,
-    height: 75,
+    width: 70,
+    height: 70,
   },
   imageL: {
-    width: 75 * 0.65,
-    height: 75 * 0.65,
+    width: 70 * 0.65,
+    height: 70 * 0.65,
   },
   L1: {
     justifyContent: 'flex-start',

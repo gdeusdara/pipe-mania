@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import fase1 from './fases/fase1';
+import fase2 from './fases/fase2';
+import fase3 from './fases/fase3';
+import fase4 from './fases/fase4';
+import fase5 from './fases/fase5';
 import parseFase from './utils/parseFase';
 import Piece from './components/Piece';
 import isSolved from './utils/isSolved';
@@ -11,7 +15,9 @@ export default function App() {
   const [extraData, setExtraData] = useState(0)
 
   useEffect(() => {
-    setFase(parseFase(fase1.trim()))
+    const parse = parseFase(fase5.trim())
+    console.log(parse)
+    setFase(parse)
   }, [])
 
   useEffect(() => {
@@ -32,7 +38,7 @@ export default function App() {
       {fase.map((item, topIndex) => {
 
         return (
-          <View style={styles.row}>
+          <View key={String(item[0] + topIndex)} style={styles.row}>
             {item.map((piece, index) => (
               <Piece key={String(piece+index)} item={piece} onPressItem={(newItem) => onPressItem(newItem, index, topIndex)} />
             ))}
