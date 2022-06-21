@@ -79,6 +79,13 @@ const reverseLLWayOut = {
   '4': 0,
 }
 
+const wayOutNumber = {
+  '1': '3',
+  '2': '4',
+  '3': '1',
+  '4': '2',
+}
+
 // before =
 /*
 
@@ -125,7 +132,12 @@ export default function isSolved(map, index1 = null, index2 = null, before = nul
       }
 
       if (!before) {
-        return isSolved(map, i+beginIWayOut[number], l+beginLWayOut[number], number)
+        const first = isSolved(map, i+beginIWayOut[number], l+beginLWayOut[number], number)
+        if (first) {
+          return first
+        }
+
+        return isSolved(map, i-beginIWayOut[number], l-beginLWayOut[number], wayOutNumber[number])
       }
     }
   }

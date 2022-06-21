@@ -6,6 +6,9 @@ import fase2 from './fases/fase2';
 import fase3 from './fases/fase3';
 import fase4 from './fases/fase4';
 import fase5 from './fases/fase5';
+import fase6 from './fases/fase6';
+import fase6solved from './fases/fase6solved';
+import smallFase1 from './fases/smallFase1';
 import parseFase from './utils/parseFase';
 import Piece from './components/Piece';
 import isSolved from './utils/isSolved';
@@ -15,7 +18,7 @@ export default function App() {
   const [extraData, setExtraData] = useState(0)
 
   useEffect(() => {
-    const parse = parseFase(fase5.trim())
+    const parse = parseFase(fase1.trim())
     console.log(parse)
     setFase(parse)
   }, [])

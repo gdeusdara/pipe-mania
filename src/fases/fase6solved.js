@@ -1,0 +1,10 @@
+export default `
+##################
+##L1L3L4R4L3L4R4##
+##B1L1L2R1R1L4R1##
+##R1R4L1L2L1R2L3##
+##L1R2L2R3L3L1R2##
+##R1L2L3L2R2L1R2##
+##L1R2L3R1L2R1B1##
+##L1L2L1L2L2L1R1##
+##################`
