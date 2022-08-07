@@ -101,8 +101,6 @@ export default function isSolved(map, index1 = null, index2 = null, before = nul
     l = result.l
   }
 
-  console.log(map[i][l], i, l, before)
-
   const letter = map[i][l][0]
   let number = map[i][l][1]
   if (letter === 'R' || letter === 'B') {

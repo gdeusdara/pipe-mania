@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Animated, TouchableOpacity, useMemo } from 'react-native';
 import { pipeBegin, pipeL, pipeReto } from '../icons';
 
-export default function Piece({ item, onPressItem = () => {} }) {
+export default function Piece({ item, onPressItem = () => {}, selected }) {
 
   const onPress = () => {
     let number = parseInt(item[1])
@@ -52,7 +52,7 @@ export default function Piece({ item, onPressItem = () => {} }) {
   }
 
   return (
-    <TouchableOpacity onPress={onPress} style={[viewStype, LStyle]}>
+    <TouchableOpacity onPress={onPress} style={[viewStype, LStyle, selected ? styles.selected : {}]}>
       <Animated.Image style={[imageStyle, {transform: [{ rotate }]}]} source={image} resizeMode="contain" />
     </TouchableOpacity>
   );
@@ -62,6 +62,9 @@ const styles = StyleSheet.create({
   image: {
     width: 70,
     height: 70,
+  },
+  selected: {
+    backgroundColor: 'yellow'
   },
   imageL: {
     width: 70 * 0.65,
