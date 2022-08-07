@@ -4,6 +4,7 @@ import { pipeBegin, pipeL, pipeReto } from '../icons';
 import AddLineColumn from './AddLineColumn';
 import PhaseString from './PhaseString';
 import Piece from './Piece';
+import RemoveLineColumn from './RemoveLineColumn';
 
 export default function Menu({ onPressPieceType = () => {}, selected, fase = [], solved, onChangeFase = () => {} }) {
 
@@ -18,7 +19,8 @@ export default function Menu({ onPressPieceType = () => {}, selected, fase = [],
       <Text style={[styles.solved, solved ? styles.isSolved : styles.notSolved]}>
         {isSolved}
       </Text>
-      <AddLineColumn fase={fase} onPress={onChangeFase} />
+      <AddLineColumn title="Adicionar" fase={fase} onPress={onChangeFase} />
+      <RemoveLineColumn title="Remover" fase={fase} onPress={onChangeFase} />
       <View style={styles.list}>
         {pieceList.map(item => (
           <Piece
@@ -37,11 +39,12 @@ export default function Menu({ onPressPieceType = () => {}, selected, fase = [],
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   list: {
-    margin: 20
+    margin: 20,
+    flexDirection: 'row'
   },
   solved: {
     fontWeight: 'bold',
-    fontSize: 15
+    fontSize: 20
   },
   isSolved: {
     color: 'blue'

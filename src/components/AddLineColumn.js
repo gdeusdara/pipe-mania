@@ -40,6 +40,7 @@ export default function AddLineColumn({ fase = [], onPress = () => {} }) {
       text2="Adicionar Coluna"
       action1={addLine}
       action2={addColumn}
+      title="Adicionar"
     />
   );
 }
