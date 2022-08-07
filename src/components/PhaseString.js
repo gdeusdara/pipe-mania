@@ -1,8 +1,21 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import * as Clipboard from 'expo-clipboard'
+import { StyleSheet, Text, View } from 'react-native';
 import Button from './Button';
 
 export default function PhaseString({ fase }) {
+
+  function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
+
   const copyToClipboard = async () => {
     let strToCopy = ''
 
@@ -11,7 +24,7 @@ export default function PhaseString({ fase }) {
 
     });
 
-    Clipboard.setString(strToCopy);
+    download('fase.txt', strToCopy);
   };
 
   return (
