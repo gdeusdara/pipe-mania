@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Clipboard from 'expo-clipboard'
+import Button from './Button';
 
 export default function PhaseString({ fase }) {
   const copyToClipboard = async () => {
@@ -26,9 +27,7 @@ export default function PhaseString({ fase }) {
           </View>
         )
       })}
-      <TouchableOpacity style={styles.button} onPress={copyToClipboard}>
-        <Text style={styles.text}>Copiar</Text>
-      </TouchableOpacity>
+      <Button onPress={copyToClipboard} text="Copiar" />
     </View>
   );
 }

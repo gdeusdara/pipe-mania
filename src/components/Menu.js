@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { pipeBegin, pipeL, pipeReto } from '../icons';
+import AddLineColumn from './AddLineColumn';
 import PhaseString from './PhaseString';
 import Piece from './Piece';
 
-export default function Menu({ onPressPieceType = () => {}, selected, fase = [], solved }) {
+export default function Menu({ onPressPieceType = () => {}, selected, fase = [], solved, onChangeFase = () => {} }) {
 
   const pieceList = ['B1', 'R1', 'L1']
   const isSolved = useMemo(() => {
@@ -17,6 +18,7 @@ export default function Menu({ onPressPieceType = () => {}, selected, fase = [],
       <Text style={[styles.solved, solved ? styles.isSolved : styles.notSolved]}>
         {isSolved}
       </Text>
+      <AddLineColumn fase={fase} onPress={onChangeFase} />
       <View style={styles.list}>
         {pieceList.map(item => (
           <Piece

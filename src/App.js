@@ -35,6 +35,11 @@ export default function App() {
     setExtraData(extraData+1)
   }
 
+  const onChangeFase = (newFase) => {
+    setFase(newFase)
+    setExtraData(extraData+1)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.phaseContainer}>
@@ -61,6 +66,7 @@ export default function App() {
             onPressPieceType={(item) => onPressItem(item, selected[0], selected[1])}
             fase={fase}
             solved={solved}
+            onChangeFase={onChangeFase}
           />
         ) : null}
       </View>
