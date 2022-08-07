@@ -1,8 +1,10 @@
-const pieceTypes = ['R', 'L']
+const pieceTypes = ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'B']
+
 const positions = ['1', '2', '3', '4']
 
-export default function generatePiece() {
-  const pieceType = pieceTypes[Math.floor(Math.random() * 2)]
+export default function generatePiece(useB = false) {
+  let b = useB ? 1 : 0
+  const pieceType = pieceTypes[Math.floor(Math.random() * (19 + b))]
   const position = positions[Math.floor(Math.random() * 4)]
 
   return `${pieceType}${position}`

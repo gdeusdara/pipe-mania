@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { pipeBegin, pipeL, pipeReto } from '../icons';
 import AddLineColumn from './AddLineColumn';
+import GeneratePhase from './GeneratePhase';
 import PhaseString from './PhaseString';
 import Piece from './Piece';
 import RemoveLineColumn from './RemoveLineColumn';
@@ -19,6 +20,7 @@ export default function Menu({ onPressPieceType = () => {}, selected, fase = [],
       <Text style={[styles.solved, solved ? styles.isSolved : styles.notSolved]}>
         {isSolved}
       </Text>
+      <GeneratePhase onPress={onChangeFase} />
       <AddLineColumn title="Adicionar" fase={fase} onPress={onChangeFase} />
       <RemoveLineColumn title="Remover" fase={fase} onPress={onChangeFase} />
       <View style={styles.list}>
