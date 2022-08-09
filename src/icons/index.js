@@ -1,3 +1,3 @@
-export { default as pipeBegin } from './pipe-begin.png'
-export { default as pipeL } from './pipe-l.png'
-export { default as pipeReto } from './pipe-reto.png'
+export { default as pipeBegin } from './pipeBegin.png'
+export { default as pipeL } from './pipeL.png'
+export { default as pipeReto } from './pipeReto.png'
