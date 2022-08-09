@@ -8,6 +8,12 @@ import parseFase from './utils/parseFase';
 import Piece from './components/Piece';
 import isSolved from './utils/isSolved';
 import Menu from './components/Menu';
+import cratePath from './utils/createPath';
+
+const dictStr = (i, j) => {
+  return `${i}+${j}`
+}
+
 
 export default function App() {
   const [fase, setFase] = useState([])
@@ -15,6 +21,10 @@ export default function App() {
   const [extraData, setExtraData] = useState(0)
   const [selected, setSelected] = useState([1, 1])
   const [solved, setSolved] = useState(false)
+  const [pathList, setPathList] = useState([])
+  const [pathDict, setPathDict] = useState({})
+  const [createPathMode, setCreatePathMode] = useState(false)
+
 
   useEffect(() => {
     const parse = parseFase(fases[faseString].trim())
@@ -22,22 +32,73 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+    if (!createPathMode && pathList.length) {
+      setFase(cratePath(fase, pathList))
+      setExtraData(extraData+1)
+      setPathList([])
+      setPathDict({})
+    }
+  }, [createPathMode])
+
+  useEffect(() => {
     if (fase.length) {
       setSolved(isSolved(fase))
     }
   }, [fase, extraData])
 
+  const onPressItemCreateMode = (i, j) => {
+    let newPathList = pathList
+    let newPathDict = pathDict
+    if(newPathList.length) {
+      if (newPathList[newPathList.length - 1][0] === i
+        && newPathList[newPathList.length - 1][1] === j
+      ) {
+        newPathDict[dictStr(newPathList[newPathList.length - 1][0], newPathList[newPathList.length - 1][1])] = false
+        newPathList.pop()
+      } else {
+        const iDiff = newPathList[newPathList.length - 1]?.[0] - i
+        const jDiff = newPathList[newPathList.length - 1]?.[1] - j
+
+        if ((iDiff && jDiff) || Math.abs(iDiff) > 1 || Math.abs(jDiff) > 1) {
+          newPathList = [[i, j]]
+          newPathDict = {}
+          newPathDict[dictStr(i, j)] = true
+        } else {
+          newPathList.push([i, j])
+          newPathDict[dictStr(i, j)] = true
+        }
+      }
+    } else {
+      newPathList.push([i, j])
+      newPathDict[dictStr(i, j)] = true
+    }
+    setPathList(newPathList)
+    setPathDict(newPathDict)
+  }
+
   const onPressItem = (newItem, i, j) => {
     const newFase = fase
-    newFase[i][j] = newItem
-    setSelected([i, j])
-    setFase(newFase)
+    if (createPathMode) {
+      onPressItemCreateMode(i, j)
+    } else {
+      newFase[i][j] = newItem
+      setSelected([i, j])
+      setFase(newFase)
+    }
     setExtraData(extraData+1)
   }
 
   const onChangeFase = (newFase) => {
     setFase(newFase)
     setExtraData(extraData+1)
+  }
+
+  const selectedPiece = (i, j) => {
+    if (createPathMode) {
+      return !!(pathDict[dictStr(i, j)])
+    }
+
+    return selected[0] === i && selected[1] === j
   }
 
   return (
@@ -51,7 +112,7 @@ export default function App() {
                 <Piece
                   key={String(piece+j)}
                   item={piece}
-                  selected={selected[0] === i && selected[1] === j}
+                  selected={selectedPiece(i, j)}
                   onPressItem={(newItem) => onPressItem(newItem, i, j)}
                 />
               ))}
@@ -63,6 +124,8 @@ export default function App() {
         {fase.length ? (
           <Menu
             selected={fase[selected[0]][selected[1]]}
+            createPathMode={createPathMode}
+            setCreatePathMode={setCreatePathMode}
             onPressPieceType={(item) => onPressItem(item, selected[0], selected[1])}
             fase={fase}
             solved={solved}
