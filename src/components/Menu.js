@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { pipeBegin, pipeL, pipeReto } from '../icons';
+import rotatePieces from '../utils/rotatePieces';
 import AddLineColumn from './AddLineColumn';
 import Button from './Button';
 import GeneratePhase from './GeneratePhase';
@@ -24,6 +25,11 @@ export default function Menu({
     return 'Não resolvido'
   }, [solved])
 
+  const rotateAll = () => {
+    const newFase = rotatePieces(fase)
+    onChangeFase(newFase);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={[styles.solved, solved ? styles.isSolved : styles.notSolved]}>
@@ -33,6 +39,10 @@ export default function Menu({
       <Button
         text={createPathMode ? 'Finalizar caminho' : 'Criar caminho'}
         onPress={() => setCreatePathMode(!createPathMode)}
+      />
+      <Button
+        text="Rotacionar peças"
+        onPress={rotateAll}
       />
       <AddLineColumn title="Adicionar" fase={fase} onPress={onChangeFase} />
       <RemoveLineColumn title="Remover" fase={fase} onPress={onChangeFase} />
