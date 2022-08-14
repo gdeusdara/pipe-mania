@@ -1,3 +1,4 @@
+import dictStr from "./dictStr";
 
 const findBegin = (map) => {
   let i = 0;
@@ -91,15 +92,23 @@ const wayOutNumber = {
 
 */
 
+let dict = {}
+
 export default function isSolved(map, index1 = null, index2 = null, before = null) {
   let i = index1;
   let l = index2;
+
+  if (index1 === null) {
+    dict = {}
+  }
 
   if (index1 === null || index2 === null) {
     const result = findBegin(map)
     i = result.i
     l = result.l
   }
+
+  dict[dictStr(i, l)] = true
 
   const letter = map[i][l][0]
   let number = map[i][l][1]
@@ -110,7 +119,7 @@ export default function isSolved(map, index1 = null, index2 = null, before = nul
         !before
       ) {
       if (letter === 'B' && before) {
-        return true
+        return { solved: true, path_dict: dict }
       }
 
       if (before === '1') {
@@ -131,7 +140,7 @@ export default function isSolved(map, index1 = null, index2 = null, before = nul
 
       if (!before) {
         const first = isSolved(map, i+beginIWayOut[number], l+beginLWayOut[number], number)
-        if (first) {
+        if (first.solved) {
           return first
         }
 
@@ -150,6 +159,5 @@ export default function isSolved(map, index1 = null, index2 = null, before = nul
     }
   }
 
-
-  return false
+  return { solved: false, path_dict: {} }
 }

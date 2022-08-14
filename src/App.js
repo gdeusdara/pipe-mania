@@ -9,10 +9,7 @@ import Piece from './components/Piece';
 import isSolved from './utils/isSolved';
 import Menu from './components/Menu';
 import cratePath from './utils/createPath';
-
-const dictStr = (i, j) => {
-  return `${i}+${j}`
-}
+import dictStr from './utils/dictStr';
 
 
 export default function App() {
@@ -21,6 +18,7 @@ export default function App() {
   const [extraData, setExtraData] = useState(0)
   const [selected, setSelected] = useState([1, 1])
   const [solved, setSolved] = useState(false)
+  const [solvedDict, setSolvedDict] = useState({})
   const [pathList, setPathList] = useState([])
   const [pathDict, setPathDict] = useState({})
   const [createPathMode, setCreatePathMode] = useState(false)
@@ -42,7 +40,9 @@ export default function App() {
 
   useEffect(() => {
     if (fase.length) {
-      setSolved(isSolved(fase))
+      const { solved, path_dict: dict } = isSolved(fase)
+      setSolved(solved)
+      setSolvedDict(dict)
     }
   }, [fase, extraData])
 
@@ -113,6 +113,7 @@ export default function App() {
                   key={String(piece+j)}
                   item={piece}
                   selected={selectedPiece(i, j)}
+                  onPath={solvedDict[dictStr(i, j)]}
                   onPressItem={(newItem) => onPressItem(newItem, i, j)}
                 />
               ))}
