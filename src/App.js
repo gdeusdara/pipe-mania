@@ -124,6 +124,7 @@ export default function App() {
       <View style={styles.menu}>
         {fase.length ? (
           <Menu
+            solvedDict={solvedDict}
             selected={fase[selected[0]][selected[1]]}
             createPathMode={createPathMode}
             setCreatePathMode={setCreatePathMode}

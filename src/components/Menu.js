@@ -16,7 +16,8 @@ export default function Menu({
   solved,
   onChangeFase = () => {},
   createPathMode,
-  setCreatePathMode = () => {}
+  setCreatePathMode = () => {},
+  solvedDict = {}
 }) {
 
   const pieceList = ['B1', 'R1', 'L1']
@@ -34,6 +35,9 @@ export default function Menu({
     <View style={styles.container}>
       <Text style={[styles.solved, solved ? styles.isSolved : styles.notSolved]}>
         {isSolved}
+      </Text>
+      <Text style={[styles.solved, solved ? styles.isSolved : styles.notSolved]}>
+        {Object.keys(solvedDict).length}
       </Text>
       <GeneratePhase onPress={onChangeFase} />
       <Button
